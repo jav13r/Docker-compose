@@ -1,4 +1,4 @@
-.PHONY: composer laravel npm yarn angular ionic react react-native vue2 vue3 vue-ui ember cordova adonis sails
+.PHONY: composer laravel npm yarn angular react vue2 vue3 vue-ui ember
 
 MAKEPATH := $(abspath $(lastword $(MAKEFILE_LIST)))
 PWD := $(dir $(MAKEPATH))
@@ -7,8 +7,6 @@ CLI=jav13r/php:7.2.4-cli
 FPM=jav13r/php:7.0.30-fpm
 COMPOSER=composer:latest
 NODE=jav13r/nodejs:8.11.3
-SAILS=jav13r/sailsjs:latest
-ADONIS=jav13r/adonisjs:latest
 
 ################################
 # php
@@ -65,16 +63,6 @@ angular:
 	$(NODE) \
 	ng new $(ARG)
 
-# ionic
-ARG=
-TMP=
-ionic:
-	docker run --rm -it \
-	-v $(PWD):/usr/share/app \
-	-w /usr/share/app \
-	$(NODE) \
-	ionic start $(ARG) $(TMP)
-
 # react
 ARG=
 react:
@@ -83,15 +71,6 @@ react:
 	-w /usr/share/app \
 	$(NODE) \
 	create-react-app $(ARG)
-
-# react native
-ARG=
-react-native:
-	docker run --rm -it \
-	-v $(PWD):/usr/share/app \
-	-w /usr/share/app \
-	$(NODE) \
-	create-react-native-app $(ARG)
 
 # vue 2
 ARG=
@@ -129,30 +108,3 @@ ember:
 	-w /usr/share/app \
 	$(NODE) \
 	ember new $(ARG)
-
-# cordova
-ARG=
-cordova:
-	docker run --rm -it \
-	-v $(PWD):/usr/share/app \
-	-w /usr/share/app \
-	$(NODE) \
-	cordova create $(ARG)
-
-# adonis
-ARG=
-adonis:
-	docker run --rm -it \
-	-v $(PWD):/usr/src/app \
-	-w /usr/src/app \
-	$(ADONIS) \
-	adonis new $(ARG)
-
-# sails
-ARG=
-sails:
-	docker run --rm -it \
-	-v $(PWD):/usr/src/app \
-	-w /usr/src/app \
-	$(SAILS) \
-	sails new $(ARG)
