@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  angular:
+    image: jav13r/nodejs:8.11.3
+    ports:
+      - '4200:4200'
+    command: 'yarn start --host 0.0.0.0'
+    volumes:
+      - $PWD:/usr/src/apps
+    working_dir: /usr/src/apps

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  ember:
+    image: jav13r/nodejs:8.11.3
+    ports:
+      - '4200:4200'
+    environment:
+        - HOST=0.0.0.0
+    command: 'yarn start prevent.env.HOST'
+    volumes:
+      - $PWD:/usr/src/apps
+    working_dir: /usr/src/apps

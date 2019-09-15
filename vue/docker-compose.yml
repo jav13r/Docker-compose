@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  vue:
+    image: jav13r/nodejs:8.11.3
+    environment:
+        - HOST=0.0.0.0
+    ports:
+      - '8080:8080'
+    command: 'yarn start'
+    volumes:
+      - $PWD:/usr/src/apps
+    working_dir: /usr/src/apps

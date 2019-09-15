@@ -1,0 +1,32 @@
+server {
+    #listen 80 default;
+
+    root /usr/share/nginx/html;
+    index index.php index.htm index.html;
+
+    server_name laravel;
+
+    large_client_header_buffers 4 16k;
+
+    location ~* \.(ico|css|js|gif|jpe?g|png|pdf)(\?[0-9]+)?$ {
+        expires max;
+        log_not_found off;
+    }
+
+    location / {
+        try_files $uri $uri /index.php$is_args$args;
+    }
+
+    location ~* \.php$ {
+        try_files $uri =  404;
+        include           fastcgi_params;
+        fastcgi_param     SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        #fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass      phpfpm:9000;
+        fastcgi_index     index.php;
+    }
+
+    location ~ /\.ht {
+        deny  all;
+    }
+}
